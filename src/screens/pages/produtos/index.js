@@ -5,131 +5,176 @@ import {
   StyleSheet,
   Image,
   Button,
-  FlatList,
   TouchableOpacity,
+  ScrollView,
 } from "react-native";
-
-const produtos = [
-  {
-    id: "1",
-    nome: "Notebook Gamer",
-    preco: 3500,
-    imagem: "https://via.placeholder.com/100",
-  },
-  {
-    id: "2",
-    nome: "Smartphone",
-    preco: 2000,
-    imagem: "https://via.placeholder.com/100",
-  },
-  {
-    id: "3",
-    nome: "Fone Bluetooth",
-    preco: 250,
-    imagem: "https://via.placeholder.com/100",
-  },
-  {
-    id: "4",
-    nome: "Mouse Gamer",
-    preco: 150,
-    imagem: "https://via.placeholder.com/100",
-  },
-  {
-    id: "5",
-    nome: "Teclado Mecânico",
-    preco: 300,
-    imagem: "https://via.placeholder.com/100",
-  },
-];
 
 export default function Produtos() {
   const [mensagem, setMensagem] = useState("");
-  const [quantidades, setQuantidades] = useState({});
 
-  const alterarQuantidade = (id, tipo) => {
-    setQuantidades((prev) => {
-      const atual = prev[id] || 1;
-
-      if (tipo === "mais") {
-        return { ...prev, [id]: atual + 1 };
-      } else {
-        return { ...prev, [id]: atual > 1 ? atual - 1 : 1 };
-      }
-    });
-  };
+  const [qtd1, setQtd1] = useState(1);
+  const [qtd2, setQtd2] = useState(1);
+  const [qtd3, setQtd3] = useState(1);
+  const [qtd4, setQtd4] = useState(1);
+  const [qtd5, setQtd5] = useState(1);
 
   return (
-    <View style={styles.container}>
-      <FlatList
-        data={produtos}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => {
-          const quantidade = quantidades[item.id] || 1;
+    <ScrollView style={styles.container}>
+      
+      {/* PRODUTO 1 */}
+      <View style={styles.card}>
+        <Image source={require("../../../assets/notebook.jpg")} style={styles.img} />
+        <Text style={styles.nome}>Notebook Gamer</Text>
+        <Text>R$ 3500</Text>
+        <Text style={styles.pix}>PIX: R$ 3150</Text>
 
-          return (
-            <View style={styles.card}>
-              <Image source={{ uri: item.imagem }} style={styles.img} />
+        <View style={styles.qtdContainer}>
+          <TouchableOpacity onPress={() => setQtd1(qtd1 > 1 ? qtd1 - 1 : 1)}>
+            <Text style={styles.btn}>-</Text>
+          </TouchableOpacity>
 
-              <Text style={styles.nome}>{item.nome}</Text>
+          <Text>{qtd1}</Text>
 
-              <Text>Preço: R$ {item.preco}</Text>
+          <TouchableOpacity onPress={() => setQtd1(qtd1 + 1)}>
+            <Text style={styles.btn}>+</Text>
+          </TouchableOpacity>
+        </View>
 
-              <Text style={styles.pix}>
-                PIX: R$ {(item.preco * 0.9).toFixed(2)}
-              </Text>
+        <Button
+          title="Adicionar ao carrinho"
+          onPress={() =>
+            setMensagem(`${qtd1}x Notebook Gamer adicionado ao carrinho`)
+          }
+        />
+      </View>
 
-              {/* Controle de quantidade */}
-              <View style={styles.qtdContainer}>
-                <TouchableOpacity
-                  style={styles.btnQtd}
-                  onPress={() => alterarQuantidade(item.id, "menos")}
-                >
-                  <Text>-</Text>
-                </TouchableOpacity>
+      {/* PRODUTO 2 */}
+      <View style={styles.card}>
+        <Image source={require("../../../assets/produtos/celular.jpg")} style={styles.img} />
+        <Text style={styles.nome}>Smartphone</Text>
+        <Text>R$ 2000</Text>
+        <Text style={styles.pix}>PIX: R$ 1800</Text>
 
-                <Text>{quantidade}</Text>
+        <View style={styles.qtdContainer}>
+          <TouchableOpacity onPress={() => setQtd2(qtd2 > 1 ? qtd2 - 1 : 1)}>
+            <Text style={styles.btn}>-</Text>
+          </TouchableOpacity>
 
-                <TouchableOpacity
-                  style={styles.btnQtd}
-                  onPress={() => alterarQuantidade(item.id, "mais")}
-                >
-                  <Text>+</Text>
-                </TouchableOpacity>
-              </View>
+          <Text>{qtd2}</Text>
 
-              <Button
-                title="Adicionar ao carrinho"
-                onPress={() =>
-                  setMensagem(
-                    `${quantidade}x ${item.nome} adicionado ao carrinho`
-                  )
-                }
-              />
-            </View>
-          );
-        }}
-      />
+          <TouchableOpacity onPress={() => setQtd2(qtd2 + 1)}>
+            <Text style={styles.btn}>+</Text>
+          </TouchableOpacity>
+        </View>
+
+        <Button
+          title="Adicionar ao carrinho"
+          onPress={() =>
+            setMensagem(`${qtd2}x Smartphone adicionado ao carrinho`)
+          }
+        />
+      </View>
+
+      {/* PRODUTO 3 */}
+      <View style={styles.card}>
+        <Image source={require("../../../assets/produtos/fone.jpg")} style={styles.img} />
+        <Text style={styles.nome}>Fone Bluetooth</Text>
+        <Text>R$ 250</Text>
+        <Text style={styles.pix}>PIX: R$ 225</Text>
+
+        <View style={styles.qtdContainer}>
+          <TouchableOpacity onPress={() => setQtd3(qtd3 > 1 ? qtd3 - 1 : 1)}>
+            <Text style={styles.btn}>-</Text>
+          </TouchableOpacity>
+
+          <Text>{qtd3}</Text>
+
+          <TouchableOpacity onPress={() => setQtd3(qtd3 + 1)}>
+            <Text style={styles.btn}>+</Text>
+          </TouchableOpacity>
+        </View>
+
+        <Button
+          title="Adicionar ao carrinho"
+          onPress={() =>
+            setMensagem(`${qtd3}x Fone Bluetooth adicionado ao carrinho`)
+          }
+        />
+      </View>
+
+      {/* PRODUTO 4 */}
+      <View style={styles.card}>
+        <Image source={require("../../../assets/produtos/mouse.jpg")} style={styles.img} />
+        <Text style={styles.nome}>Mouse Gamer</Text>
+        <Text>R$ 150</Text>
+        <Text style={styles.pix}>PIX: R$ 135</Text>
+
+        <View style={styles.qtdContainer}>
+          <TouchableOpacity onPress={() => setQtd4(qtd4 > 1 ? qtd4 - 1 : 1)}>
+            <Text style={styles.btn}>-</Text>
+          </TouchableOpacity>
+
+          <Text>{qtd4}</Text>
+
+          <TouchableOpacity onPress={() => setQtd4(qtd4 + 1)}>
+            <Text style={styles.btn}>+</Text>
+          </TouchableOpacity>
+        </View>
+
+        <Button
+          title="Adicionar ao carrinho"
+          onPress={() =>
+            setMensagem(`${qtd4}x Mouse Gamer adicionado ao carrinho`)
+          }
+        />
+      </View>
+
+      {/* PRODUTO 5 */}
+      <View style={styles.card}>
+        <Image source={require("../../../assets/produtos/teclado.jpg")} style={styles.img} />
+        <Text style={styles.nome}>Teclado Mecânico</Text>
+        <Text>R$ 300</Text>
+        <Text style={styles.pix}>PIX: R$ 270</Text>
+
+        <View style={styles.qtdContainer}>
+          <TouchableOpacity onPress={() => setQtd5(qtd5 > 1 ? qtd5 - 1 : 1)}>
+            <Text style={styles.btn}>-</Text>
+          </TouchableOpacity>
+
+          <Text>{qtd5}</Text>
+
+          <TouchableOpacity onPress={() => setQtd5(qtd5 + 1)}>
+            <Text style={styles.btn}>+</Text>
+          </TouchableOpacity>
+        </View>
+
+        <Button
+          title="Adicionar ao carrinho"
+          onPress={() =>
+            setMensagem(`${qtd5}x Teclado Mecânico adicionado ao carrinho`)
+          }
+        />
+      </View>
 
       {mensagem !== "" && <Text style={styles.msg}>{mensagem}</Text>}
-    </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     padding: 10,
   },
   card: {
     backgroundColor: "#f2f2f2",
     padding: 15,
-    marginBottom: 10,
+    marginBottom: 15,
     borderRadius: 10,
     alignItems: "center",
   },
   img: {
-    width: 100,
-    height: 100,
+    width: 120,
+    height: 120,
     marginBottom: 10,
   },
   nome: {
@@ -143,17 +188,18 @@ const styles = StyleSheet.create({
   qtdContainer: {
     flexDirection: "row",
     alignItems: "center",
+    gap: 15,
     marginVertical: 10,
-    gap: 10,
   },
-  btnQtd: {
+  btn: {
+    fontSize: 20,
     backgroundColor: "#ddd",
-    padding: 5,
+    paddingHorizontal: 10,
     borderRadius: 5,
   },
   msg: {
     textAlign: "center",
-    marginTop: 10,
+    marginVertical: 15,
     fontWeight: "bold",
   },
 });
